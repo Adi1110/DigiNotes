@@ -15,21 +15,26 @@
 						<div class = "card-header text-center">
 							<p class = "fs-4">Edit/Modify Notes</p>
 							
+							<th:block th:if="${session.msg}">
+								<p class = "text-center text-success fs-4">[[${session.msg}]]</p>
+								<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+							
 						</div>
 						<div class ="card-body">
 						
-							<form action="#" th:action="@{/addNotes}" th:object="${digiNotes}" method="POST">
+							<form action="/user/updateNotes" method="POST">
 							
 							  <div class="mb-3">
 							    <label for="exampleInputTitle" class="form-label">Title</label>
-							    <input type="title" class="form-control" id="exampleInputTitle" placeholder="Enter Title" name = "email">
+							    <input type="title" class="form-control" id="exampleInputTitle" placeholder="Enter Title" name = "title" th:value="${n.title}">
 							  </div>
 							  
 							  <div class="mb-3">
 							    <label for="exampleInputDescription" class="form-label">Description</label>
-							    <textarea rows="6" cols="" class="form-control" placeholder="Write your description here." name = "description"></textarea>
+							    <textarea rows="6" cols="" class="form-control" placeholder="Write your description here." name = "description">[[${n.description}]]</textarea>
 							  </div>
-							  
+							  <input type="hidden" name="id" th:value="${n.id}"/>
 							  <button type="submit" class="btn btn-primary">Modify</button>							  
 							</form>
 						</div>
